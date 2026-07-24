@@ -15,7 +15,7 @@ import HeaderLink from './HeaderLink.astro';
 				<nav aria-label="Primary navigation" data-primary-nav>
 					<span class="nav-pill" data-nav-pill aria-hidden="true"></span>
 					<HeaderLink href="/blog">Notes</HeaderLink>
-					<HeaderLink href="/about">About me</HeaderLink>
+					<HeaderLink href="/about">About</HeaderLink>
 					<HeaderLink href="/contact">Contact</HeaderLink>
 				</nav>
 				<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
@@ -71,12 +71,25 @@ import HeaderLink from './HeaderLink.astro';
 
 			themeToggle.addEventListener('click', () => {
 				const theme = currentTheme() === 'dark' ? 'light' : 'dark';
-				document.documentElement.dataset.theme = theme;
-				try {
-					window.localStorage.setItem('shen.zip-theme', theme);
-				} catch {}
-				syncThemeToggle();
-				window.dispatchEvent(new CustomEvent('shen:theme-change', { detail: { theme } }));
+				const applyTheme = () => {
+					document.documentElement.dataset.theme = theme;
+					try {
+						window.localStorage.setItem('shen.zip-theme', theme);
+					} catch {}
+					syncThemeToggle();
+					window.dispatchEvent(new CustomEvent('shen:theme-change', { detail: { theme } }));
+				};
+
+				const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				if (typeof document.startViewTransition === 'function' && !reducedMotion) {
+					document.documentElement.setAttribute('data-theme-switching', '');
+					const transition = document.startViewTransition(applyTheme);
+					transition.finished.finally(() => {
+						document.documentElement.removeAttribute('data-theme-switching');
+					});
+				} else {
+					applyTheme();
+				}
 			});
 			systemTheme.addEventListener('change', () => {
 				if (document.documentElement.dataset.theme) return;

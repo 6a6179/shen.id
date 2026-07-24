@@ -72,7 +72,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 	h1 {
 		max-width: 40rem;
 		margin: 0;
-		font-size: clamp(2.75rem, 8vw, 4.75rem);
+		font-size: clamp(2.8rem, 8vw, 4.75rem);
 		font-weight: 610;
 		letter-spacing: -0.06em;
 		line-height: 0.98;
@@ -84,6 +84,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 		color: var(--muted-foreground);
 		font-size: 1.05rem;
 		line-height: 1.55;
+		text-wrap: pretty;
 	}
 
 	.article-date,
