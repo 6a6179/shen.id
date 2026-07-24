@@ -10,6 +10,7 @@ work/
 workers/contact/.wrangler/
 workers/contact/worker-configuration.d.ts
 .codex/
+.claude/
 
 .DS_Store
 .idea/
