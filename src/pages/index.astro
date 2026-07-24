@@ -1,6 +1,12 @@
 ---
+import { getCollection } from 'astro:content';
+import PostRow from '../components/PostRow.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import SiteLayout from '../layouts/SiteLayout.astro';
+
+const recentPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 2);
 ---
 
 <SiteLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
@@ -20,7 +26,16 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 		</div>
 	</header>
 
-	<section class="home-visuals" aria-label="A few things">
+	{recentPosts.length > 0 && (
+		<section class="home-notes" aria-labelledby="home-notes-label">
+			<h2 class="section-label" id="home-notes-label">Recent notes</h2>
+			{recentPosts.map((post) => <PostRow post={post} headingLevel="h3" />)}
+			<a class="all-notes-link" href="/blog">All notes →</a>
+		</section>
+	)}
+
+	<section class="home-visuals" aria-labelledby="home-visuals-label">
+		<h2 class="section-label" id="home-visuals-label">A few things</h2>
 		<figure class="home-figure home-figure--wide">
 			<picture>
 				<source
@@ -151,6 +166,29 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 		margin-bottom: 0;
 	}
 
+	.home-notes {
+		margin-top: clamp(3rem, 6vw, 4rem);
+	}
+
+	.all-notes-link {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		margin-top: 0.85rem;
+		color: var(--muted-foreground);
+		font-size: 0.88rem;
+		font-weight: 570;
+		text-decoration: none;
+	}
+
+	.all-notes-link:hover,
+	.all-notes-link:focus-visible {
+		color: var(--accent-strong);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+	}
+
 	.home-visuals {
 		margin-top: clamp(3rem, 6vw, 4rem);
 	}
@@ -177,6 +215,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 		margin-top: 0.65rem;
 		color: var(--muted-foreground);
 		font-size: 0.78rem;
+		letter-spacing: 0.02em;
 		line-height: 1.45;
 	}
 

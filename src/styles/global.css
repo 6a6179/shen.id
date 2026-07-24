@@ -11,6 +11,28 @@
 	mix-blend-mode: normal;
 }
 
+/* Theme toggle runs inside a view transition so the palette cross-fades
+   instead of hard-cutting; navigation transitions keep animation: none. */
+html[data-theme-switching]::view-transition-old(root) {
+	animation: theme-fade-out 200ms ease both;
+}
+
+html[data-theme-switching]::view-transition-new(root) {
+	animation: theme-fade-in 200ms ease both;
+}
+
+@keyframes theme-fade-out {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes theme-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
 ::view-transition-group(nav-active-pill) {
 	animation-duration: 220ms;
 	animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -161,6 +183,16 @@ body {
 	color: var(--primary-foreground);
 }
 
+h1,
+h2,
+h3 {
+	text-wrap: balance;
+}
+
+time {
+	font-variant-numeric: tabular-nums;
+}
+
 a,
 button,
 input,
@@ -185,6 +217,14 @@ textarea:focus-visible {
 .site-main {
 	min-height: calc(100vh - 13rem);
 	padding-block: clamp(3.5rem, 9vw, 6rem) clamp(5rem, 11vw, 8rem);
+}
+
+.section-label {
+	margin: 0 0 1.5rem;
+	color: var(--muted-foreground);
+	font-size: 0.82rem;
+	font-weight: 610;
+	letter-spacing: 0.01em;
 }
 
 .skip-link {
@@ -229,6 +269,10 @@ textarea:focus-visible {
 	margin: 1.35em 0;
 }
 
+.prose p {
+	text-wrap: pretty;
+}
+
 .prose h2,
 .prose h3,
 .prose h4 {
@@ -262,6 +306,23 @@ textarea:focus-visible {
 	background: var(--code-background);
 	font-family: var(--font-mono-stack);
 	font-size: 0.88em;
+}
+
+.prose kbd {
+	padding: 0.12em 0.45em;
+	border: 1px solid var(--border);
+	border-bottom-width: 2px;
+	border-radius: 0.3rem;
+	background: var(--code-background);
+	font-family: var(--font-mono-stack);
+	font-size: 0.82em;
+}
+
+.prose :target {
+	margin-inline: -0.25rem;
+	padding-inline: 0.25rem;
+	border-radius: 0.2rem;
+	background: color-mix(in srgb, var(--accent-strong) 11%, transparent);
 }
 
 .prose pre {
@@ -311,6 +372,36 @@ textarea:focus-visible {
 
 	.site-main {
 		padding-block: 3.5rem 5.5rem;
+	}
+}
+
+@media print {
+	:root {
+		color-scheme: light;
+	}
+
+	body {
+		background: #fff;
+		color: #000;
+	}
+
+	.site-header,
+	.site-footer,
+	.skip-link,
+	.back-link,
+	.verification-block,
+	.contact-submit {
+		display: none !important;
+	}
+
+	.site-main {
+		width: 100%;
+		min-height: 0;
+		padding-block: 0;
+	}
+
+	.prose a {
+		color: inherit;
 	}
 }
 

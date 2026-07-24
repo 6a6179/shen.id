@@ -24,7 +24,7 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 
 	<header class="contact-header">
 		<h1>Send me a note</h1>
-		<p>Use the form below.</p>
+		<p>Goes straight to my inbox.</p>
 	</header>
 
 	<div class="contact-form-shell">
@@ -35,7 +35,9 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 			aria-label="Contact form"
 		>
 			<noscript>
-				<p class="no-script-message">JavaScript is required to send this form.</p>
+				<p class="no-script-message">
+					JavaScript is required to send this form. You can email <a href="mailto:contact@shen.zip">contact@shen.zip</a> instead.
+				</p>
 			</noscript>
 			<div class="field-grid">
 				<label>
@@ -84,6 +86,9 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 				<button id="verification-retry" class="verification-retry" type="button" hidden>
 					Retry verification
 				</button>
+				<p id="verification-fallback" class="verification-fallback" role="status" hidden>
+					Blocked by an extension? Email <a href="mailto:contact@shen.zip">contact@shen.zip</a> instead.
+				</p>
 			</div>
 
 			<div class="form-footer">
@@ -110,6 +115,7 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 			const status = form.querySelector('#form-status');
 			const verificationStatus = form.querySelector('#verification-status');
 			const retryButton = form.querySelector('#verification-retry');
+			const fallbackNote = form.querySelector('#verification-fallback');
 			const button = form.querySelector('button[type="submit"]');
 			const widget = form.querySelector('.cf-turnstile');
 			if (
@@ -148,6 +154,7 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 				verificationStatus.dataset.state = '';
 				widget.dataset.state = 'ready';
 				retryButton.hidden = true;
+				if (fallbackNote instanceof HTMLElement) fallbackNote.hidden = true;
 				button.disabled = false;
 			};
 			const showVerificationError = (message = 'Verification did not load.') => {
@@ -159,6 +166,7 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 				verificationStatus.dataset.state = 'error';
 				widget.dataset.state = 'failed';
 				retryButton.hidden = false;
+				if (fallbackNote instanceof HTMLElement) fallbackNote.hidden = false;
 				button.disabled = true;
 				if (widgetId !== undefined) {
 					window.turnstile?.remove(widgetId);
@@ -176,6 +184,7 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 				verificationStatus.dataset.state = '';
 				widget.dataset.state = 'loading';
 				retryButton.hidden = true;
+				if (fallbackNote instanceof HTMLElement) fallbackNote.hidden = true;
 				button.disabled = true;
 			};
 
@@ -426,6 +435,19 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 	.cf-turnstile[data-state='failed'] {
 		display: none;
 		min-height: 0;
+	}
+
+	.verification-fallback {
+		margin: 0;
+		color: var(--muted-foreground);
+		font-size: 0.82rem;
+	}
+
+	.verification-fallback a {
+		color: var(--accent-strong);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
 	}
 
 	.verification-retry {

@@ -4,15 +4,17 @@ import FormattedDate from './FormattedDate.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
+	headingLevel?: 'h2' | 'h3';
 }
 
-const { post } = Astro.props;
+const { post, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
 ---
 
 <article class="post-row">
 	<a href={`/blog/${post.id}/`}>
 		<div class="post-copy">
-				<h2>{post.data.title}</h2>
+			<Heading class="post-title">{post.data.title}</Heading>
 			<p>{post.data.description}</p>
 		</div>
 		<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
@@ -38,7 +40,7 @@ const { post } = Astro.props;
 		min-width: 0;
 	}
 
-	h2 {
+	.post-title {
 		margin: 0;
 		font-size: clamp(1.2rem, 3vw, 1.5rem);
 		font-weight: 620;
@@ -57,11 +59,12 @@ const { post } = Astro.props;
 		padding-top: 0.2rem;
 		color: var(--muted-foreground);
 		font-size: 0.8rem;
+		text-align: right;
 		white-space: nowrap;
 	}
 
-	a:hover h2,
-	a:focus-visible h2 {
+	a:hover .post-title,
+	a:focus-visible .post-title {
 		color: var(--accent-strong);
 		text-decoration: underline;
 		text-decoration-thickness: 1px;
@@ -77,6 +80,7 @@ const { post } = Astro.props;
 		.post-date {
 			grid-row: 1;
 			padding-top: 0;
+			text-align: left;
 		}
 
 		.post-copy {
