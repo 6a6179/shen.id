@@ -1,272 +1,70 @@
 ---
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Textarea } from '../components/ui/textarea';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
-import SiteLayout from '../layouts/SiteLayout.astro';
 
 const SITEKEY = '0x4AAAAAADzncJEwqw9wYIHB';
 const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 ---
 
-<SiteLayout
-	title="Contact"
-	description={`Send Jay a message through ${SITE_TITLE}.`}
->
-	<Fragment slot="head">
-		<script
-			is:inline
-			src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-			async
-			defer
-		></script>
-	</Fragment>
-
-	<header class="contact-header">
-		<h1>Send me a note</h1>
-		<p>Goes straight to my inbox.</p>
-	</header>
-
-	<div class="contact-form-shell">
-		<form
-			id="contact-form"
-			method="post"
-			data-submit-url={SUBMIT_URL}
-			aria-label="Contact form"
-		>
-			<noscript>
-				<p class="no-script-message">JavaScript is required to send this form.</p>
-			</noscript>
-			<div class="field-grid">
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Contact | ${SITE_TITLE}`} description="Get in touch." />
+		<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Contact</h1>
+			<form id="contact-form">
 				<label>
-					<span>Name</span>
-					<Input
-						name="name"
-						autoComplete="name"
-						className="contact-input"
-						maxLength={100}
-						required
-					/>
+					Name
+					<input name="name" autocomplete="name" required />
 				</label>
 				<label>
-					<span>Email</span>
-					<Input
-						name="email"
-						type="email"
-						autoComplete="email"
-						className="contact-input"
-						maxLength={254}
-						required
-					/>
+					Email
+					<input name="email" type="email" autocomplete="email" required />
 				</label>
-			</div>
-
-			<label>
-				<span>Message</span>
-				<Textarea
-					name="message"
-					className="contact-textarea"
-					maxLength={5000}
-					required
-				/>
-			</label>
-
-			<div class="verification-block">
-				<span>Verification</span>
-				<p id="verification-status" class="verification-status" aria-live="polite" hidden></p>
+				<label>
+					Message
+					<textarea name="message" required></textarea>
+				</label>
 				<div
 					class="cf-turnstile"
-					data-state="loading"
 					data-sitekey={SITEKEY}
-					data-size="flexible"
+					data-theme="auto"
 					data-action="turnstile-spin-v1"
 				></div>
-				<button id="verification-retry" class="verification-retry" type="button" hidden>
-					Retry verification
-				</button>
-			</div>
-
-			<div class="form-footer">
-				<Button
-					type="submit"
-					size="lg"
-					className="contact-submit"
-					aria-describedby="verification-status"
-					disabled
-				>
-					Send
-				</Button>
+				<button type="submit">Send</button>
 				<p id="form-status" role="status" aria-live="polite"></p>
-			</div>
-		</form>
-	</div>
+			</form>
+		</main>
+		<Footer />
 
-	<script is:inline data-astro-rerun>
-		(() => {
+		<script is:inline define:vars={{ submitUrl: SUBMIT_URL }}>
 			const form = document.querySelector('#contact-form');
-			if (!(form instanceof HTMLFormElement)) return;
-
-			const submitUrl = form.dataset.submitUrl;
-			const status = form.querySelector('#form-status');
-			const verificationStatus = form.querySelector('#verification-status');
-			const retryButton = form.querySelector('#verification-retry');
+			const status = document.querySelector('#form-status');
 			const button = form.querySelector('button[type="submit"]');
-			const widget = form.querySelector('.cf-turnstile');
-			if (
-				!submitUrl ||
-				!(status instanceof HTMLElement) ||
-				!(verificationStatus instanceof HTMLElement) ||
-				!(retryButton instanceof HTMLButtonElement) ||
-				!(button instanceof HTMLButtonElement) ||
-				!(widget instanceof HTMLElement)
-			) return;
-
-				const editableControls = Array.from(
-				form.querySelectorAll('input[name="name"], input[name="email"], textarea[name="message"]'),
-			).filter((control) => control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement);
-			const setStatus = (message, state = '') => {
-				status.textContent = message;
-				status.dataset.state = state;
-			};
-			let verified = false;
-			let widgetId;
-			let renderTimer;
-			let verificationTimer;
-			let requestTimer;
-			let requestController;
-			let disposed = false;
-			const clearVerificationTimers = () => {
-				window.clearTimeout(renderTimer);
-				window.clearTimeout(verificationTimer);
-			};
-			const markVerificationReady = () => {
-				if (disposed) return;
-				verified = true;
-				clearVerificationTimers();
-				verificationStatus.hidden = true;
-				verificationStatus.textContent = '';
-				verificationStatus.dataset.state = '';
-				widget.dataset.state = 'ready';
-				retryButton.hidden = true;
-				button.disabled = false;
-			};
-			const showVerificationError = (message = 'Verification did not load.') => {
-				if (disposed) return;
-				verified = false;
-				clearVerificationTimers();
-				verificationStatus.hidden = false;
-				verificationStatus.textContent = message;
-				verificationStatus.dataset.state = 'error';
-				widget.dataset.state = 'failed';
-				retryButton.hidden = false;
-				button.disabled = true;
-				if (widgetId !== undefined) {
-					window.turnstile?.remove(widgetId);
-					widgetId = undefined;
-				}
-			};
-			const armVerificationTimer = () => {
-				window.clearTimeout(verificationTimer);
-				verificationTimer = window.setTimeout(() => showVerificationError(), 10_000);
-			};
-			const resetVerificationState = () => {
-				verified = false;
-				verificationStatus.hidden = true;
-				verificationStatus.textContent = '';
-				verificationStatus.dataset.state = '';
-				widget.dataset.state = 'loading';
-				retryButton.hidden = true;
-				button.disabled = true;
-			};
-
-			const renderTurnstile = () => {
-				if (disposed) return;
-				if (widget.dataset.state !== 'loading') return;
-				if (!window.turnstile) {
-					renderTimer = window.setTimeout(renderTurnstile, 50);
-					return;
-				}
-
-				try {
-					const size = widget.getBoundingClientRect().width < 300 ? 'compact' : 'flexible';
-					const theme = document.documentElement.dataset.theme
-						|| (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-					widgetId = window.turnstile.render(widget, {
-						sitekey: widget.dataset.sitekey,
-						theme,
-						action: widget.dataset.action,
-						size,
-						callback: markVerificationReady,
-						'expired-callback': () => {
-							if (disposed) return;
-							resetVerificationState();
-							if (widgetId !== undefined) window.turnstile?.reset(widgetId);
-						},
-						'timeout-callback': () => showVerificationError('Verification timed out.'),
-						'unsupported-callback': () => showVerificationError('This browser cannot run verification.'),
-						'error-callback': () => showVerificationError(),
-					});
-					clearVerificationTimers();
-				} catch {
-					showVerificationError();
-				}
-			};
-			resetVerificationState();
-			armVerificationTimer();
-			renderTurnstile();
-			const handleThemeChange = () => {
-				if (disposed || verified) return;
-				clearVerificationTimers();
-				if (widgetId !== undefined) {
-					window.turnstile?.remove(widgetId);
-					widgetId = undefined;
-				}
-				widget.replaceChildren();
-				resetVerificationState();
-				armVerificationTimer();
-				renderTurnstile();
-			};
-			window.addEventListener('shen:theme-change', handleThemeChange);
-			document.addEventListener('astro:before-swap', () => {
-				disposed = true;
-				const activeWidgetId = widgetId;
-				widgetId = undefined;
-				clearVerificationTimers();
-				window.clearTimeout(requestTimer);
-				window.removeEventListener('shen:theme-change', handleThemeChange);
-				if (activeWidgetId !== undefined) window.turnstile?.remove(activeWidgetId);
-				requestController?.abort();
-			}, { once: true });
-			retryButton.addEventListener('click', () => {
-				widget.replaceChildren();
-				resetVerificationState();
-				armVerificationTimer();
-				renderTurnstile();
-			});
 
 			form.addEventListener('submit', async (event) => {
 				event.preventDefault();
-				if (disposed || button.disabled) return;
 				const formData = new FormData(form);
 				const token = formData.get('cf-turnstile-response');
 
 				if (!token) {
-					setStatus('Please complete the verification.', 'error');
+					status.textContent = 'Please complete the verification.';
 					return;
 				}
 
 				button.disabled = true;
-				editableControls.forEach((control) => { control.disabled = true; });
-				form.setAttribute('aria-busy', 'true');
-				setStatus('Sending…');
-				requestController = new AbortController();
-				requestTimer = window.setTimeout(() => requestController?.abort(), 15_000);
+				status.textContent = 'Sending…';
 
 				try {
 					const response = await fetch(submitUrl, {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
-						signal: requestController.signal,
 						body: JSON.stringify({
 							name: formData.get('name'),
 							email: formData.get('email'),
@@ -275,225 +73,65 @@ const SUBMIT_URL = 'https://shen-zip-contact.jsh-e38.workers.dev';
 						}),
 					});
 					const result = await response.json().catch(() => ({}));
-					if (disposed) return;
 
 					if (!response.ok || result.success !== true) {
 						throw new Error(result.error || 'Message delivery is temporarily unavailable.');
 					}
 
 					form.reset();
-					resetVerificationState();
-					if (widgetId !== undefined) window.turnstile?.reset(widgetId);
-					setStatus('Sent. Thanks.', 'success');
+					window.turnstile?.reset();
+					status.textContent = 'Sent.';
 				} catch (error) {
-					if (disposed) return;
-					const message = error instanceof DOMException && error.name === 'AbortError'
-						? 'That took too long. Please try again.'
-						: error instanceof Error
-							? error.message
-							: 'Message delivery is temporarily unavailable.';
-					setStatus(message, 'error');
-					resetVerificationState();
-					if (widgetId !== undefined) window.turnstile?.reset(widgetId);
+					status.textContent = error instanceof Error
+						? error.message
+						: 'Message delivery is temporarily unavailable.';
+					window.turnstile?.reset();
 				} finally {
-					window.clearTimeout(requestTimer);
-					requestController = undefined;
-					if (!disposed) {
-						editableControls.forEach((control) => { control.disabled = false; });
-						button.disabled = !verified;
-						form.removeAttribute('aria-busy');
-					}
+					button.disabled = false;
 				}
 			});
-		})();
-	</script>
-</SiteLayout>
+		</script>
+	</body>
+</html>
 
 <style>
-	.contact-header {
-		max-width: 42rem;
-	}
-
-	.contact-header h1 {
-		margin: 0;
-		font-size: clamp(2.8rem, 8vw, 4.75rem);
-		font-weight: 610;
-		letter-spacing: -0.06em;
-		line-height: 0.98;
-	}
-
-	.contact-header p {
-		max-width: 36rem;
-		margin: 1.25rem 0 0;
-		color: var(--muted-foreground);
-		font-size: 1.05rem;
-		line-height: 1.6;
-	}
-
-	.contact-form-shell {
-		width: 100%;
-		margin-top: clamp(2.5rem, 5vw, 3.25rem);
-	}
-
 	form,
 	label {
 		display: grid;
+		gap: 0.5rem;
 	}
-
 	form {
-		grid-template-columns: minmax(0, 1fr);
-		gap: 1.4rem;
-		min-width: 0;
-	}
-
-	form > *,
-	.field-grid,
-	.verification-block,
-	.cf-turnstile {
-		min-width: 0;
-		max-width: 100%;
-	}
-
-	label {
-		gap: 0.45rem;
-		min-width: 0;
-		font-size: 0.82rem;
-		font-weight: 610;
-	}
-
-	.field-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1rem;
 	}
-
-	:global(.contact-input) {
-		height: 2.8rem;
-		padding-inline: 0.8rem;
-		border-color: var(--input);
-		border-radius: 0.25rem;
-		background: var(--card);
-		font-size: 1rem;
+	input,
+	textarea {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 0.65rem;
+		border: 1px solid var(--border);
+		background: var(--background);
+		color: var(--text);
+		font: inherit;
 	}
-
-	:global(.contact-textarea) {
-		min-height: 11rem;
-		padding: 0.75rem 0.8rem;
-		border-color: var(--input);
-		border-radius: 0.25rem;
-		background: var(--card);
-		font-size: 1rem;
-		line-height: 1.55;
+	textarea {
+		min-height: 10rem;
 		resize: vertical;
 	}
-
-	.verification-block {
-		display: grid;
-		gap: 0.55rem;
-		padding: 1rem 0;
-		border-top: 1px solid var(--border);
-		border-bottom: 1px solid var(--border);
-	}
-
-	.verification-block > span {
-		font-size: 0.82rem;
-		font-weight: 610;
-	}
-
-	.verification-status {
-		margin: 0;
-		color: var(--muted-foreground);
-		font-size: 0.76rem;
-	}
-
-	.verification-status[data-state='error'] {
-		color: var(--destructive);
-	}
-
-	.no-script-message {
-		margin: 0;
-		padding: 0.75rem;
-		border: 1px solid var(--destructive);
-		border-radius: 0.25rem;
-		color: var(--destructive);
-		font-size: 0.82rem;
-	}
-
-	.cf-turnstile {
-		min-height: 4.1rem;
-	}
-
-	.cf-turnstile[data-state='failed'] {
-		display: none;
-		min-height: 0;
-	}
-
-	.verification-retry {
-		justify-self: start;
-		min-height: 2.75rem;
-		padding: 0;
+	button {
+		width: fit-content;
+		padding: 0.55rem 1rem;
 		border: 0;
-		background: transparent;
-		color: var(--accent-strong);
+		background: var(--link);
+		color: var(--background);
 		font: inherit;
-		font-size: 0.82rem;
-		font-weight: 650;
-		text-decoration: underline;
-		text-underline-offset: 0.18em;
 		cursor: pointer;
 	}
-
-	.form-footer {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		align-items: center;
-		justify-content: space-between;
+	button:disabled {
+		opacity: 0.6;
+		cursor: wait;
 	}
-
-	:global(.contact-submit) {
-		height: 2.75rem;
-		padding-inline: 1.1rem;
-		border-radius: 0.25rem;
-		font-size: 0.9rem;
-	}
-
 	#form-status {
-		min-height: 1.4em;
+		min-height: 1.5em;
 		margin: 0;
-		color: var(--muted-foreground);
-		font-size: 0.78rem;
-		text-align: right;
-	}
-
-	#form-status[data-state='success'] {
-		color: var(--accent-strong);
-	}
-
-	#form-status[data-state='error'] {
-		color: var(--destructive);
-	}
-
-	@media (max-width: 560px) {
-		.field-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.form-footer {
-			align-items: flex-start;
-		}
-
-		#form-status {
-			width: 100%;
-			text-align: left;
-		}
-	}
-
-	@media (max-width: 340px) {
-		form > .verification-block {
-			width: min(300px, calc(100vw - 1.25rem));
-			max-width: none;
-			justify-self: center;
-		}
 	}
 </style>
