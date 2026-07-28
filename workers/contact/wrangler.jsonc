@@ -11,9 +11,9 @@
 		}
 	],
 	"vars": {
-		"ALLOWED_ORIGINS": "https://shen.zip,https://www.shen.zip,http://localhost:4321,http://127.0.0.1:4321",
+		"ALLOWED_ORIGINS": "https://shen.id,https://www.shen.id,https://shen.zip,https://www.shen.zip,http://localhost:4321,http://127.0.0.1:4321",
 		"TURNSTILE_ACTION": "turnstile-spin-v1",
-		"TURNSTILE_HOSTNAMES": "shen.zip,www.shen.zip,localhost,127.0.0.1"
+		"TURNSTILE_HOSTNAMES": "shen.id,www.shen.id,shen.zip,www.shen.zip,localhost,127.0.0.1"
 	},
 	"observability": {
 		"enabled": true

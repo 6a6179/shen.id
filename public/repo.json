@@ -2,8 +2,8 @@
   "name": "Shen IPA Repository",
   "identifier": "zip.shen.ipa-repository",
   "subtitle": "Apps for Feather and other AltStore-compatible signers",
-  "description": "A personal AltStore-compatible source hosted at shen.zip.",
-  "website": "https://shen.zip",
+  "description": "A personal AltStore-compatible source hosted at shen.id.",
+  "website": "https://shen.id",
   "tintColor": "#171717",
   "featuredApps": [
     "com.google.ios.youtube",
@@ -17,24 +17,24 @@
       "developerName": "arichornlover & Various Contributors",
       "subtitle": "uYouPlus with additional features",
       "localizedDescription": "uYou is the best tweak for the YouTube app. uYouEnhanced is a modified version of qnblackcat's uYouPlus & MiRO92's uYou with even more features. Additional features include skipping sponsorships in videos, more PiP options, unlocking higher resolutions, disabling overlays, removing upsell alerts, dimming the UI, enabling the miniplayer, preventing notch issues, configuring A/B settings, and adding a timestamp button.",
-      "iconURL": "https://shen.zip/ipa-assets/icons/uyou-enhanced.png",
+      "iconURL": "https://shen.id/ipa-assets/icons/uyou-enhanced.png",
       "tintColor": "#E81E8A",
       "category": "photo-video",
       "screenshots": [
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/1.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/2.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/3.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/4.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/5.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/6.jpeg"
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/1.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/2.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/3.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/4.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/5.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/6.jpeg"
       ],
       "screenshotURLs": [
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/1.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/2.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/3.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/4.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/5.jpeg",
-        "https://shen.zip/ipa-assets/screenshots/uyou-enhanced/6.jpeg"
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/1.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/2.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/3.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/4.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/5.jpeg",
+        "https://shen.id/ipa-assets/screenshots/uyou-enhanced/6.jpeg"
       ],
       "versions": [
         {
@@ -90,7 +90,7 @@
       "developerName": "6a6179",
       "subtitle": "Open-source Xray proxy client",
       "localizedDescription": "An open-source iOS 26+ proxy client built with SwiftUI, a Network Extension packet tunnel, and a client-only Xray-core bridge. Supports VLESS, REALITY, Trojan, Hysteria2, Shadowsocks, VMess, WireGuard, subscriptions, routing, QR import, latency testing, and local geodata. Tunnel operation requires signing that preserves the Packet Tunnel, App Groups, and Keychain entitlements.",
-      "iconURL": "https://shen.zip/ipa-assets/icons/hop.png",
+      "iconURL": "https://shen.id/ipa-assets/icons/hop.png",
       "tintColor": "#5D70E8",
       "category": "utilities",
       "beta": true,
@@ -140,7 +140,7 @@
       "developerName": "Brandon Plank & ThatcherDev",
       "subtitle": "A Swift Flappy Bird clone",
       "localizedDescription": "A close Flappy Bird clone written in Swift with support for iPhone and iPad. Version 4.3 removes the leaderboard, accounts, and anti-cheat components.",
-      "iconURL": "https://shen.zip/ipa-assets/icons/flappy-bird.png",
+      "iconURL": "https://shen.id/ipa-assets/icons/flappy-bird.png",
       "tintColor": "#70C5CE",
       "category": "games",
       "versions": [
