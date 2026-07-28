@@ -28,7 +28,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPO_PATH = ROOT / "public" / "repo.json"
-USER_AGENT = "shen.zip-ipa-source-updater/1.0"
+USER_AGENT = "shen.id-ipa-source-updater/1.0"
 
 UYOU_FEED = (
     "https://raw.githubusercontent.com/"

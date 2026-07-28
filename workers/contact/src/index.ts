@@ -231,9 +231,11 @@ function methodResult(response: JmapResponse, callId: string, expectedName: stri
 
 function chooseIdentity(identities: Identity[], preferredEmail: string): Identity {
 	const preferred = identities.find((identity) => identity.email.toLowerCase() === preferredEmail);
-	const exact = identities.find((identity) => identity.email.toLowerCase() === 'contact@shen.zip');
-	const shenZip = identities.find((identity) => identity.email.toLowerCase().endsWith('@shen.zip'));
-	const identity = preferred ?? exact ?? shenZip ?? identities[0];
+	const exact = identities.find((identity) => identity.email.toLowerCase() === 'contact@shen.id');
+	const shenId = identities.find((identity) => identity.email.toLowerCase().endsWith('@shen.id'));
+	const legacyExact = identities.find((identity) => identity.email.toLowerCase() === 'contact@shen.zip');
+	const legacyDomain = identities.find((identity) => identity.email.toLowerCase().endsWith('@shen.zip'));
+	const identity = exact ?? shenId ?? preferred ?? legacyExact ?? legacyDomain ?? identities[0];
 
 	if (!identity?.id || !isEmail(identity.email)) {
 		throw new ContactError('fastmail-identity-missing', 503, 'Message delivery is temporarily unavailable.');
@@ -269,7 +271,7 @@ async function sendWithFastmail(contact: Contact, env: Env): Promise<void> {
 	}
 
 	const now = new Date().toISOString();
-	const body = `New message from shen.zip\n\nName: ${contact.name}\nEmail: ${contact.email}\n\n${contact.message}`;
+	const body = `New message from shen.id\n\nName: ${contact.name}\nEmail: ${contact.email}\n\n${contact.message}`;
 	const result = await fastmailRequest<JmapResponse>(session.apiUrl, token, {
 		using: [JMAP_CORE, JMAP_MAIL, JMAP_SUBMISSION],
 		methodCalls: [
@@ -281,10 +283,10 @@ async function sendWithFastmail(contact: Contact, env: Env): Promise<void> {
 						draft: {
 							mailboxIds: { [drafts.id]: true },
 							keywords: { $draft: true, $seen: true },
-							from: [{ name: identity.name || 'shen.zip', email: identity.email }],
-							to: [{ name: 'shen.zip', email: recipient }],
+							from: [{ name: identity.name || 'shen.id', email: identity.email }],
+							to: [{ name: 'shen.id', email: recipient }],
 							replyTo: [{ name: contact.name, email: contact.email }],
-							subject: `shen.zip contact: ${contact.name}`,
+							subject: `shen.id contact: ${contact.name}`,
 							receivedAt: now,
 							sentAt: now,
 							bodyStructure: { type: 'text/plain', partId: 'text' },
@@ -319,7 +321,7 @@ async function sendWithFastmail(contact: Contact, env: Env): Promise<void> {
 async function handleSubmit(request: Request, env: Env): Promise<Response> {
 	const origin = request.headers.get('Origin');
 	if (!isAllowedOrigin(origin, env)) {
-		return json({ success: false, error: 'This form can only be sent from shen.zip.' }, 403, origin, env);
+		return json({ success: false, error: 'This form can only be sent from shen.id.' }, 403, origin, env);
 	}
 
 	if (!request.headers.get('Content-Type')?.includes('application/json')) {
@@ -366,7 +368,7 @@ export default {
 		const origin = request.headers.get('Origin');
 
 		if (request.method === 'GET' && url.pathname === '/health') {
-			return json({ ok: true, service: 'shen.zip contact' }, 200, origin, env);
+			return json({ ok: true, service: 'shen.id contact' }, 200, origin, env);
 		}
 
 		if (request.method === 'OPTIONS') {
