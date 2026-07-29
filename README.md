@@ -1,6 +1,8 @@
 # shen.id
 
-A simple personal website and blog built with Astro. It deploys to Cloudflare Pages.
+A one-page personal site built with Astro and Three.js — a GPU particle field
+that forms `shen.id`, repels from the cursor, and ripples on click. It deploys
+to Cloudflare Pages.
 
 ## Commands
 
@@ -31,7 +33,7 @@ python3 scripts/update_ipa_repo.py
 
 ## Contact form
 
-The contact form is protected by Cloudflare Turnstile and posts to <https://contact.shen.id>, backed by the `shen-zip-contact` Worker. It sends to a private Fastmail inbox. The inbox address and Fastmail API token are stored as Worker secrets, not in the website source.
+The contact form lives in an overlay on the index page. It is protected by Cloudflare Turnstile and posts to <https://contact.shen.id>, backed by the `shen-zip-contact` Worker. It sends to a private Fastmail inbox. The inbox address and Fastmail API token are stored as Worker secrets, not in the website source.
 
 ```sh
 npm run check:contact
