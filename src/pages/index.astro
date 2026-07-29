@@ -12,7 +12,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 		<title>{TITLE}</title>
 		<meta name="description" content={DESCRIPTION} />
 		<meta name="theme-color" content="#060410" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
 		<link rel="canonical" href="https://shen.id" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
@@ -51,7 +51,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 			</div>
 			<nav class="links" aria-label="Links">
 				<a href="https://github.com/6a6179" target="_blank" rel="noopener noreferrer">GitHub<span class="arr">&nearr;</span></a>
-				<button id="ipa-copy" type="button" title="Copy AltStore source URL">IPA Repo<span class="arr" id="ipa-arr">&#x2398;</span></button>
+				<button id="ipa-copy" type="button" title="Copy AltStore source URL">IPA Repo<span class="arr" id="ipa-arr">&#x29C9;</span></button>
 				<span class="sr-only" id="ipa-status" role="status"></span>
 				<button id="contact-open" type="button">Contact<span class="arr">&rarr;</span></button>
 			</nav>
@@ -127,7 +127,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 					clearTimeout(ipaTimer);
 					ipaTimer = setTimeout(() => {
 						ipaBtn.classList.remove('copied');
-						ipaArr.textContent = '⎘';
+						ipaArr.textContent = '⧉';
 					}, 1400);
 				} catch {
 					requestAnimationFrame(() => (ipaStatus.textContent = 'Could not copy — opening link instead'));
