@@ -13,6 +13,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 		<meta name="description" content={DESCRIPTION} />
 		<meta name="theme-color" content="#060410" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=2" />
 		<link rel="canonical" href="https://shen.id" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
 		<meta property="og:type" content="website" />
@@ -29,7 +30,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 		<canvas id="gl" aria-hidden="true"></canvas>
 		<div class="grain" aria-hidden="true"></div>
 
-		<div class="fallback-hero" aria-hidden="true">
+		<div class="fallback-hero" aria-hidden="true" data-nosnippet>
 			<span>shen<em>.id</em></span>
 		</div>
 		<noscript>
@@ -38,26 +39,26 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 			</style>
 		</noscript>
 
-		<header class="hud hud-top">
+		<div class="hud hud-top" data-nosnippet>
 			<a class="wordmark" href="/">shen.id</a>
 			<time class="clock" id="clock" aria-hidden="true"></time>
-		</header>
+		</div>
 
 		<main class="hud hud-bottom">
 			<div class="bio">
 				<h1 class="sr-only">Jay Shen</h1>
-				<p class="tag">JAY SHEN</p>
+				<p class="tag"><span data-nosnippet>JAY SHEN</span></p>
 				<p>I do stuff</p>
 			</div>
-			<nav class="links" aria-label="Links">
+			<div class="links" role="navigation" aria-label="Links" data-nosnippet>
 				<a href="https://github.com/6a6179" target="_blank" rel="noopener noreferrer">GitHub<span class="arr">&nearr;</span></a>
 				<button id="ipa-copy" type="button" title="Copy AltStore source URL">IPA Repo<span class="arr" id="ipa-arr">&#x29C9;</span></button>
 				<span class="sr-only" id="ipa-status" role="status"></span>
 				<button id="contact-open" type="button">Contact<span class="arr">&rarr;</span></button>
-			</nav>
+			</div>
 		</main>
 
-		<div class="overlay" id="contact-overlay" hidden>
+		<div class="overlay" id="contact-overlay" hidden data-nosnippet>
 			<div class="overlay-backdrop" data-close></div>
 			<section class="panel" role="dialog" aria-modal="true" aria-labelledby="contact-title">
 				<header class="panel-head">
@@ -270,7 +271,7 @@ const DESCRIPTION = 'Jay Shen. I do stuff.';
 				el.addEventListener('mouseenter', () => scramble(el));
 				el.addEventListener('focus', () => scramble(el));
 			});
-			const tagEl = document.querySelector('.tag');
+			const tagEl = document.querySelector('.tag span');
 			if (tagEl) setTimeout(() => scramble(tagEl), 1300);
 
 			/* let the entrance animation finish, then hand opacity to the
