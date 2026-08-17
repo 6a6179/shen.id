@@ -12,6 +12,7 @@ import argparse
 import dataclasses
 import datetime as dt
 import hashlib
+import http.client
 import json
 import os
 import plistlib
@@ -19,12 +20,13 @@ import re
 import shutil
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_REPO_PATH = ROOT / "public" / "repo.json"
@@ -83,9 +85,58 @@ def request(url: str, *, method: str = "GET") -> urllib.request.Request:
     return urllib.request.Request(url, method=method, headers=headers)
 
 
+RETRYABLE_STATUS = {408, 429, 500, 502, 503, 504}
+RETRY_ATTEMPTS = 4
+RETRY_BASE_DELAY = 2.0
+RETRY_AFTER_MAX = 60.0
+
+
+def with_retries(operation: Callable[[], Any], *, description: str) -> Any:
+    """Run a network operation, retrying transient failures with backoff.
+
+    Non-transient HTTP errors (including the 3xx responses that
+    resolve_download_url treats as success) propagate immediately. A
+    Retry-After above RETRY_AFTER_MAX also propagates: retrying sooner than
+    the server asked can extend a rate-limit block, and the next scheduled
+    run is only six hours away.
+    """
+    for attempt in range(1, RETRY_ATTEMPTS + 1):
+        delay = RETRY_BASE_DELAY * 2 ** (attempt - 1)
+        try:
+            return operation()
+        except urllib.error.HTTPError as error:
+            if error.code not in RETRYABLE_STATUS or attempt == RETRY_ATTEMPTS:
+                raise
+            retry_after = (error.headers.get("Retry-After") or "") if error.headers else ""
+            if retry_after.isascii() and retry_after.isdigit():
+                if float(retry_after) > RETRY_AFTER_MAX:
+                    raise
+                delay = max(delay, float(retry_after))
+            reason = f"HTTP {error.code}"
+        except (
+            urllib.error.URLError,
+            http.client.HTTPException,
+            ConnectionError,
+            TimeoutError,
+        ) as error:
+            if attempt == RETRY_ATTEMPTS:
+                raise
+            reason = str(error) or type(error).__name__
+        print(
+            f"Transient failure ({reason}) fetching {description}; "
+            f"retry {attempt}/{RETRY_ATTEMPTS - 1} in {delay:.0f}s",
+            file=sys.stderr,
+        )
+        time.sleep(delay)
+    raise AssertionError("unreachable")
+
+
 def fetch_json(url: str) -> Any:
-    with urllib.request.urlopen(request(url), timeout=60) as response:
-        return json.load(response)
+    def attempt() -> Any:
+        with urllib.request.urlopen(request(url), timeout=60) as response:
+            return json.load(response)
+
+    return with_retries(attempt, description=url)
 
 
 def resolve_download_url(url: str) -> str:
@@ -97,7 +148,10 @@ def resolve_download_url(url: str) -> str:
     opener = urllib.request.build_opener(NoRedirect)
     headers = None
     try:
-        with opener.open(request(url, method="HEAD"), timeout=30) as response:
+        with with_retries(
+            lambda: opener.open(request(url, method="HEAD"), timeout=30),
+            description=url,
+        ) as response:
             headers = response.headers
     except urllib.error.HTTPError as error:
         if 300 <= error.code < 400:
@@ -246,7 +300,8 @@ def discover_candidates(selected: set[str]) -> list[Candidate]:
     return candidates
 
 
-def inspect_ipa(url: str, destination: Path) -> IPAMetadata:
+def download_ipa(url: str, destination: Path) -> tuple[int, str]:
+    """Download to destination, returning (size, sha256). Safe to retry whole."""
     digest = hashlib.sha256()
     size = 0
     with urllib.request.urlopen(request(url), timeout=180) as response, destination.open(
@@ -256,6 +311,13 @@ def inspect_ipa(url: str, destination: Path) -> IPAMetadata:
             output.write(chunk)
             digest.update(chunk)
             size += len(chunk)
+    return size, digest.hexdigest()
+
+
+def inspect_ipa(url: str, destination: Path) -> IPAMetadata:
+    size, sha256 = with_retries(
+        lambda: download_ipa(url, destination), description=url
+    )
 
     if not zipfile.is_zipfile(destination):
         raise RuntimeError(f"Downloaded file is not an IPA/ZIP: {url}")
@@ -285,7 +347,7 @@ def inspect_ipa(url: str, destination: Path) -> IPAMetadata:
         if info.get("MinimumOSVersion")
         else None,
         size=size,
-        sha256=digest.hexdigest(),
+        sha256=sha256,
     )
 
 
