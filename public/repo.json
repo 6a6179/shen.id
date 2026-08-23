@@ -38,6 +38,17 @@
       ],
       "versions": [
         {
+          "version": "21.14.4",
+          "buildVersion": "21.14.4",
+          "marketingVersion": "21.14.4 / uYouEnhanced 3.0.5",
+          "date": "2026-08-22T00:00:00-05:00",
+          "localizedDescription": "Current YouTube IPA: \"21.14.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.14.4 - 3.0.5: (2026-08-22)\n\n• Updated for YouTube 21.14.4\n• uYou Downloads fixed for modern YouTube (fixes infinite \"Downloading...\")\n• Fixed iSponsorBlock startup crash on 21.x\n• App Icons now actually work + fresh grid picker UI\n• Notifications Tab is now reorderable\n• iPad & landscape UI fixes across all custom menus\n• uYou rebranded to 3.0.5 (Unofficial build)",
+          "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
+          "size": 135836281,
+          "minOSVersion": "16.0",
+          "sha256": "7fb70d423f6b8896fef7a4cf6ba24178a97be7590f1b09a615848c588d9b7f7c"
+        },
+        {
           "version": "20.44.2",
           "buildVersion": "20.44.2",
           "marketingVersion": "20.44.2 / uYouEnhanced 3.0.4",
@@ -78,11 +89,11 @@
           "NSUserTrackingUsageDescription": "To personalize ads and provide ad measurement, YouTube will link activity from this app with activity from non-Google apps and websites."
         }
       },
-      "version": "20.44.2",
-      "versionDate": "2026-02-24",
-      "versionDescription": "Current YouTube IPA: \"20.44.2\"\nCurrent uYouEnhanced Version: \"3.0.4\"\n\nRELEASE 20.44.2 - 3.0.4: (2026-02-24)\n\n• Updated for YouTube 20.44.2\n• Updated App Version Spoofer to support versions 20.34.2–21.08.3\n• Marked older spoofer versions 19.01.1–19.20.2 as Deprecated ⚠️\n• LowContrastMode updated to 1.8.0 with reorganized code and iOS 16+ focus\n• Added new tweak: YTHidePlayerButtons 1.0.0\n• Added new tweak: YTweaks by fosterbarnes\n• Rewritten AppIconsOptionsController functionality\n• Updated Notifications Tab icon customization\n• Updated submodules\n• Removed options: Disable Modern Buttons & Disable Modern A/B Flags",
-      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-20442-304.ipa",
-      "size": 134673057
+      "version": "21.14.4",
+      "versionDate": "2026-08-22T00:00:00-05:00",
+      "versionDescription": "Current YouTube IPA: \"21.14.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.14.4 - 3.0.5: (2026-08-22)\n\n• Updated for YouTube 21.14.4\n• uYou Downloads fixed for modern YouTube (fixes infinite \"Downloading...\")\n• Fixed iSponsorBlock startup crash on 21.x\n• App Icons now actually work + fresh grid picker UI\n• Notifications Tab is now reorderable\n• iPad & landscape UI fixes across all custom menus\n• uYou rebranded to 3.0.5 (Unofficial build)",
+      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
+      "size": 135836281
     },
     {
       "name": "Hop",
