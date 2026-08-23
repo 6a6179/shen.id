@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-07-25T03:38:12Z",
+  "generatedAt": "2026-08-23T07:01:21Z",
   "apps": [
     {
       "name": "uYouEnhanced",
       "sourceRepository": "https://github.com/arichornlover/uYouEnhanced",
       "sourceFeed": "https://raw.githubusercontent.com/arichornlover/arichornlover.github.io/main/apps.json",
-      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-20442-304.ipa",
-      "size": 134673057,
-      "sha256": "97a867a179964aeb7e21e1bd069cbfc7681914894a9a89b5654c369be4aed356"
+      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
+      "size": 135836281,
+      "sha256": "7fb70d423f6b8896fef7a4cf6ba24178a97be7590f1b09a615848c588d9b7f7c"
     },
     {
       "name": "Hop",
