@@ -44,9 +44,9 @@
           "date": "2026-08-22T00:00:00-05:00",
           "localizedDescription": "Current YouTube IPA: \"21.14.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.14.4 - 3.0.5: (2026-08-22)\n\n• Updated for YouTube 21.14.4\n• uYou Downloads fixed for modern YouTube (fixes infinite \"Downloading...\")\n• Fixed iSponsorBlock startup crash on 21.x\n• App Icons now actually work + fresh grid picker UI\n• Notifications Tab is now reorderable\n• iPad & landscape UI fixes across all custom menus\n• uYou rebranded to 3.0.5 (Unofficial build)",
           "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
-          "size": 135836281,
+          "size": 135840058,
           "minOSVersion": "16.0",
-          "sha256": "7fb70d423f6b8896fef7a4cf6ba24178a97be7590f1b09a615848c588d9b7f7c"
+          "sha256": "a504baed9952f4e352b4f21906bb6bb1fc199d43a4a724eee2a2eab40c287bcb"
         },
         {
           "version": "20.44.2",
@@ -93,7 +93,7 @@
       "versionDate": "2026-08-22T00:00:00-05:00",
       "versionDescription": "Current YouTube IPA: \"21.14.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.14.4 - 3.0.5: (2026-08-22)\n\n• Updated for YouTube 21.14.4\n• uYou Downloads fixed for modern YouTube (fixes infinite \"Downloading...\")\n• Fixed iSponsorBlock startup crash on 21.x\n• App Icons now actually work + fresh grid picker UI\n• Notifications Tab is now reorderable\n• iPad & landscape UI fixes across all custom menus\n• uYou rebranded to 3.0.5 (Unofficial build)",
       "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
-      "size": 135836281
+      "size": 135840058
     },
     {
       "name": "Hop",
