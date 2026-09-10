@@ -167,6 +167,17 @@
       "category": "games",
       "versions": [
         {
+          "version": "4.5",
+          "buildVersion": "1",
+          "marketingVersion": "4.5: iOS 27 Rework",
+          "date": "2026-09-10T17:53:41Z",
+          "localizedDescription": "**Full Changelog**: https://github.com/brandonplank/flappybird/compare/4.3...4.5\r\n\r\n* Added support for iOS 27\r\n* Made the bird act like the original game\r\n\r\nMore coming soon.\r\nsorry for 4 years without updates :(",
+          "downloadURL": "https://github.com/brandonplank/flappybird/releases/download/4.5/org.brandonplank.flappybird.ipa",
+          "size": 1238203,
+          "minOSVersion": "16.0",
+          "sha256": "76877101e96ffbcb2c1f39cce8c665de3645d0bf112834cb3956b49244463a32"
+        },
+        {
           "version": "4.3",
           "buildVersion": "1",
           "marketingVersion": "4.3",
@@ -184,11 +195,11 @@
         ],
         "privacy": {}
       },
-      "version": "4.3",
-      "versionDate": "2022-06-14T20:54:11Z",
-      "versionDescription": "**Full Changelog**: https://github.com/crypticplank/flappybird/compare/4.2.0...4.3\r\n* Removed Leaderboard\r\n* Removed Accounts\r\n* Removed Anti-Cheat",
-      "downloadURL": "https://github.com/brandonplank/flappybird/releases/download/4.3/org.brandonplank.flappybird.ipa",
-      "size": 2099365
+      "version": "4.5",
+      "versionDate": "2026-09-10T17:53:41Z",
+      "versionDescription": "**Full Changelog**: https://github.com/brandonplank/flappybird/compare/4.3...4.5\r\n\r\n* Added support for iOS 27\r\n* Made the bird act like the original game\r\n\r\nMore coming soon.\r\nsorry for 4 years without updates :(",
+      "downloadURL": "https://github.com/brandonplank/flappybird/releases/download/4.5/org.brandonplank.flappybird.ipa",
+      "size": 1238203
     }
   ],
   "news": []

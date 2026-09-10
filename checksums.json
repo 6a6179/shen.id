@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-05T04:30:39Z",
+  "generatedAt": "2026-09-10T20:53:04Z",
   "apps": [
     {
       "name": "uYouEnhanced",
@@ -20,10 +20,10 @@
     {
       "name": "Flappy Bird",
       "sourceRepository": "https://github.com/brandonplank/flappybird",
-      "release": "https://github.com/brandonplank/flappybird/releases/tag/4.3",
-      "downloadURL": "https://github.com/brandonplank/flappybird/releases/download/4.3/org.brandonplank.flappybird.ipa",
-      "size": 2099365,
-      "sha256": "95994220d9f47050d484727c33a355f9d8fe3c41110466e443d00bb4eb6973d6"
+      "release": "https://github.com/brandonplank/flappybird/releases/tag/4.5",
+      "downloadURL": "https://github.com/brandonplank/flappybird/releases/download/4.5/org.brandonplank.flappybird.ipa",
+      "size": 1238203,
+      "sha256": "76877101e96ffbcb2c1f39cce8c665de3645d0bf112834cb3956b49244463a32"
     }
   ]
 }
