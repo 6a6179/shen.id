@@ -1,8 +1,7 @@
 # shen.id
 
-A one-page personal site built with Astro and Three.js — a GPU particle field
-that forms `shen.id`, repels from the cursor, and ripples on click. It deploys
-to Cloudflare Pages.
+A minimal one-page personal site built with Astro — a name, a line, and a few
+links, following the system light/dark theme. It deploys to Cloudflare Pages.
 
 ## Commands
 
