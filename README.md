@@ -32,7 +32,7 @@ python3 scripts/update_ipa_repo.py
 
 ## Contact form
 
-The contact form lives in an overlay on the index page. It is protected by Cloudflare Turnstile and posts to <https://contact.shen.id>, backed by the `shen-zip-contact` Worker. It sends to a private Fastmail inbox. The inbox address and Fastmail API token are stored as Worker secrets, not in the website source.
+The contact form lives in an overlay on the index page. It is protected by Cloudflare Turnstile and posts to <https://contact.shen.id>, backed by the `shen-contact` Worker. It sends to a private Fastmail inbox. The inbox address and Fastmail API token are stored as Worker secrets, not in the website source.
 
 ```sh
 npm run check:contact
