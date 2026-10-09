@@ -38,6 +38,17 @@
       ],
       "versions": [
         {
+          "version": "21.20.4",
+          "buildVersion": "21.20.4",
+          "marketingVersion": "21.20.4 / uYouEnhanced 3.0.5",
+          "date": "2026-10-09T00:00:00-05:00",
+          "localizedDescription": "Current YouTube IPA: \"21.20.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.20.4 - 3.0.5: (2026-10-09)\n\n• Updated for YouTube 21.20.4\n• Reworked uYou downloads (now finish reliably)\n• Added uYouEnhanced Debug Logs\n• Restored BigYTMiniPlayer\n• Fixed 25 reported issues\n• Bug fixes and stability improvements",
+          "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21204-305.ipa",
+          "size": 154391978,
+          "minOSVersion": "16.0",
+          "sha256": "cdc908526c21acd083256b3cb8902db5841dcc5747337b9bea301894202a1d72"
+        },
+        {
           "version": "21.14.4",
           "buildVersion": "21.14.4",
           "marketingVersion": "21.14.4 / uYouEnhanced 3.0.5",
@@ -89,11 +100,11 @@
           "NSUserTrackingUsageDescription": "To personalize ads and provide ad measurement, YouTube will link activity from this app with activity from non-Google apps and websites."
         }
       },
-      "version": "21.14.4",
-      "versionDate": "2026-08-22T00:00:00-05:00",
-      "versionDescription": "Current YouTube IPA: \"21.14.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.14.4 - 3.0.5: (2026-08-22)\n\n• Updated for YouTube 21.14.4\n• uYou Download enhancements\n• Bug fixes and stability improvements",
-      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21144-305.ipa",
-      "size": 135840058
+      "version": "21.20.4",
+      "versionDate": "2026-10-09T00:00:00-05:00",
+      "versionDescription": "Current YouTube IPA: \"21.20.4\"\nCurrent uYou Version: \"3.0.5 (Unofficial)\"\n\nRELEASE 21.20.4 - 3.0.5: (2026-10-09)\n\n• Updated for YouTube 21.20.4\n• Reworked uYou downloads (now finish reliably)\n• Added uYouEnhanced Debug Logs\n• Restored BigYTMiniPlayer\n• Fixed 25 reported issues\n• Bug fixes and stability improvements",
+      "downloadURL": "https://archive.org/download/YouTubeRebornPlus_19.10.5-4.2.6/yt-uYE-21204-305.ipa",
+      "size": 154391978
     },
     {
       "name": "Hop",
