@@ -119,6 +119,17 @@
       "versions": [
         {
           "version": "0.1.2",
+          "buildVersion": "36",
+          "marketingVersion": "Hop unsigned IPA 36.1",
+          "date": "2026-11-19T22:25:52Z",
+          "localizedDescription": "Unsigned IPA built from 6a6179/Hop@a49e43b33e5679d38a42de8aecbda695f42be5d5.\n\n- Branch/ref: main\n- Workflow run: https://github.com/6a6179/Hop/actions/runs/44625573069\n- Product build (CFBundleVersion): 36\n- Size: 23620042 bytes\n- SHA-256: d92616ab1f7905dee8181c76302ee00fd06355fcfedae33cab731b9a6960d29c\n\nThis IPA is ad-hoc fakesigned: each binary carries its required entitlements (Packet Tunnel, App Groups, Keychain) with a placeholder XXXXXXXXXX. team prefix so sideload signers can re-map them. It still needs proper signing/provisioning before installation on a physical device. When re-signing, make sure your tool signs the embedded HopTunnel.appex with the Packet Tunnel entitlement — without it iOS kills the VPN extension at launch.",
+          "downloadURL": "https://github.com/6a6179/Hop/releases/download/unsigned-ipa-36.1/Hop-unsigned.ipa",
+          "size": 23620042,
+          "minOSVersion": "26.0",
+          "sha256": "d92616ab1f7905dee8181c76302ee00fd06355fcfedae33cab731b9a6960d29c"
+        },
+        {
+          "version": "0.1.2",
           "buildVersion": "35",
           "marketingVersion": "Hop unsigned IPA 35.1",
           "date": "2026-11-19T21:48:10Z",
@@ -173,10 +184,10 @@
         }
       },
       "version": "0.1.2",
-      "versionDate": "2026-11-19T21:48:10Z",
-      "versionDescription": "Unsigned IPA built from 6a6179/Hop@984a529bf808a315d8b1c7a429754a3ae3e1199e.\n\n- Branch/ref: main\n- Workflow run: https://github.com/6a6179/Hop/actions/runs/44620291445\n- Product build (CFBundleVersion): 35\n- Size: 23607288 bytes\n- SHA-256: d097762cea92810ebde7f6fce92fe99d33bb7408a5822ddc21ac913f5dd71042\n\nThis IPA is ad-hoc fakesigned: each binary carries its required entitlements (Packet Tunnel, App Groups, Keychain) with a placeholder XXXXXXXXXX. team prefix so sideload signers can re-map them. It still needs proper signing/provisioning before installation on a physical device. When re-signing, make sure your tool signs the embedded HopTunnel.appex with the Packet Tunnel entitlement — without it iOS kills the VPN extension at launch.",
-      "downloadURL": "https://github.com/6a6179/Hop/releases/download/unsigned-ipa-35.1/Hop-unsigned.ipa",
-      "size": 23607288
+      "versionDate": "2026-11-19T22:25:52Z",
+      "versionDescription": "Unsigned IPA built from 6a6179/Hop@a49e43b33e5679d38a42de8aecbda695f42be5d5.\n\n- Branch/ref: main\n- Workflow run: https://github.com/6a6179/Hop/actions/runs/44625573069\n- Product build (CFBundleVersion): 36\n- Size: 23620042 bytes\n- SHA-256: d92616ab1f7905dee8181c76302ee00fd06355fcfedae33cab731b9a6960d29c\n\nThis IPA is ad-hoc fakesigned: each binary carries its required entitlements (Packet Tunnel, App Groups, Keychain) with a placeholder XXXXXXXXXX. team prefix so sideload signers can re-map them. It still needs proper signing/provisioning before installation on a physical device. When re-signing, make sure your tool signs the embedded HopTunnel.appex with the Packet Tunnel entitlement — without it iOS kills the VPN extension at launch.",
+      "downloadURL": "https://github.com/6a6179/Hop/releases/download/unsigned-ipa-36.1/Hop-unsigned.ipa",
+      "size": 23620042
     },
     {
       "name": "Flappy Bird",
