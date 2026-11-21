@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T23:23:10Z",
+  "generatedAt": "2026-11-21T02:05:50Z",
   "apps": [
     {
       "name": "uYouEnhanced",
@@ -12,10 +12,10 @@
     {
       "name": "Hop",
       "sourceRepository": "https://github.com/6a6179/Hop",
-      "release": "https://github.com/6a6179/Hop/releases/tag/unsigned-ipa-37.1",
-      "downloadURL": "https://github.com/6a6179/Hop/releases/download/unsigned-ipa-37.1/Hop-unsigned.ipa",
-      "size": 23630460,
-      "sha256": "92eee7c6d8a361df4f1730cd08af1d99d2726bc6451488fcf5b42b1c89e9d6b3"
+      "release": "https://github.com/6a6179/Hop/releases/tag/unsigned-ipa-41.1",
+      "downloadURL": "https://github.com/6a6179/Hop/releases/download/unsigned-ipa-41.1/Hop-unsigned.ipa",
+      "size": 23792285,
+      "sha256": "7ab78892b0fabc25a3b1cca1a284f394a17aa6024c1a232d46e531355620dae6"
     },
     {
       "name": "Flappy Bird",
